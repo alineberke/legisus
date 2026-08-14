@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legislação Diária SUS — União + Santa Catarina</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --surface-2:      #ffffff;
+    --page-plane:     #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --gridline:       #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    --success-text:   #006300;
+
+    /* Identidade visual - Prefeitura de Joinville */
+    --brand-navy:      #003866;
+    --brand-navy-dark: #00294d;
+    --brand-navy-tint: #e7edf3;
+    --brand-on-navy:   #ffffff;
+    --brand-link:      #003866;
+
+    --slot-1: #2a78d6; /* Atenção Básica */
+    --slot-2: #eb6834; /* Atenção Especializada */
+    --slot-3: #1baf7a; /* Vigilância em Saúde */
+    --slot-4: #eda100; /* Gestão do Trabalho e Educação na Saúde */
+    --slot-5: #e87ba4; /* Assistência Farmacêutica */
+    --slot-6: #008300; /* Financiamento e Custeio do SUS */
+    --slot-7: #4a3aa7; /* Ciência, Tecnologia e Avaliação de Tecnologias */
+    --slot-8: #e34948; /* Gestão, Pactuação e Regulação do SUS */
+    --slot-muted: #898781; /* Outros */
+
+    --status-warning: #fab219;
+    --status-critical: #d03b3b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1:      #1a1a19;
+      --surface-2:      #222221;
+      --page-plane:     #0d0d0d;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --gridline:       #2c2c2a;
+      --baseline:       #383835;
+      --border:         rgba(255,255,255,0.10);
+      --success-text:   #0ca30c;
+
+      --brand-navy:      #12466f;
+      --brand-navy-dark: #1a5586;
+      --brand-navy-tint: rgba(106,176,242,0.14);
+      --brand-on-navy:   #ffffff;
+      --brand-link:      #6ab0f2;
+
+      --slot-1: #3987e5;
+      --slot-2: #d95926;
+      --slot-3: #199e70;
+      --slot-4: #c98500;
+      --slot-5: #d55181;
+      --slot-6: #008300;
+      --slot-7: #9085e9;
+      --slot-8: #e66767;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1:      #1a1a19;
+    --surface-2:      #222221;
+    --page-plane:     #0d0d0d;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #898781;
+    --gridline:       #2c2c2a;
+    --baseline:       #383835;
+    --border:         rgba(255,255,255,0.10);
+    --success-text:   #0ca30c;
+
+    --brand-navy:      #12466f;
+    --brand-navy-dark: #1a5586;
+    --brand-navy-tint: rgba(106,176,242,0.14);
+    --brand-on-navy:   #ffffff;
+    --brand-link:      #6ab0f2;
+
+    --slot-1: #3987e5;
+    --slot-2: #d95926;
+    --slot-3: #199e70;
+    --slot-4: #c98500;
+    --slot-5: #d55181;
+    --slot-6: #008300;
+    --slot-7: #9085e9;
+    --slot-8: #e66767;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--page-plane);
+    color: var(--text-primary);
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 64px; }
+
+  header.top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 16px; margin-bottom: 22px; flex-wrap: wrap;
+    background: linear-gradient(135deg, var(--brand-navy), var(--brand-navy-dark));
+    color: var(--brand-on-navy);
+    border-radius: 14px; padding: 20px 24px;
+  }
+  header.top h1 { font-size: 21px; margin: 0 0 4px; color: var(--brand-on-navy); }
+  header.top .meta { color: rgba(255,255,255,0.82); font-size: 13px; line-height: 1.6; }
+  header.top .meta a { color: #fff; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.45); text-underline-offset: 2px; }
+  header.top .meta a:hover { text-decoration-color: #fff; }
+  header.top .meta strong { color: #fff; }
+
+  .brand { display: flex; gap: 16px; align-items: flex-start; }
+  .brand-logo { height: 58px; width: auto; flex: none; margin-top: 1px; }
+  .brand-text .eyebrow {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .08em;
+    color: rgba(255,255,255,0.72); font-weight: 700;
+  }
+  .brand-text .org-line { font-size: 12.5px; color: rgba(255,255,255,0.85); margin: 2px 0 8px; }
+
+  .theme-toggle {
+    border: 1px solid rgba(255,255,255,0.55); background: transparent; color: #fff;
+    border-radius: 8px; padding: 7px 12px; font-size: 13px; cursor: pointer;
+  }
+  .theme-toggle:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
+
+  .stat-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 22px;
+  }
+  @media (max-width: 720px) { .stat-row { grid-template-columns: repeat(2, 1fr); } }
+  .stat-tile {
+    background: var(--surface-1); border: 1px solid var(--border); border-top: 3px solid var(--brand-navy);
+    border-radius: 12px; padding: 14px 16px;
+  }
+  .stat-tile .label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+  .stat-tile .value {
+    font-size: 28px; font-weight: 600; font-variant-numeric: proportional-nums; color: var(--brand-navy);
+  }
+  .stat-tile.alert { border-top-color: var(--status-critical); }
+  .stat-tile.alert .value { color: var(--status-critical); }
+  .stat-tile .sub { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+
+  .filters {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px 14px; margin-bottom: 16px;
+  }
+  .filters input[type="search"] {
+    flex: 1 1 220px; min-width: 180px; padding: 8px 10px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface-2); color: var(--text-primary);
+    font-size: 13px;
+  }
+  .filters input[type="search"]:focus {
+    outline: none; border-color: var(--brand-navy);
+    box-shadow: 0 0 0 3px var(--brand-navy-tint);
+  }
+
+  .date-range { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .date-range label {
+    display: flex; gap: 5px; align-items: center; font-size: 12.5px; color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .date-range input[type="date"] {
+    border: 1px solid var(--border); background: var(--surface-2); color: var(--text-primary);
+    border-radius: 8px; padding: 6px 8px; font-size: 12.5px;
+  }
+  .date-range input[type="date"]:focus {
+    outline: none; border-color: var(--brand-navy);
+    box-shadow: 0 0 0 3px var(--brand-navy-tint);
+  }
+
+  .btn-export {
+    margin-left: auto; border: 1.5px solid var(--brand-navy); background: var(--brand-navy); color: #fff;
+    border-radius: 8px; padding: 7px 14px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-export:hover { background: var(--brand-navy-dark); border-color: var(--brand-navy-dark); }
+  .chip-group { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    border: 1.5px solid var(--brand-link); background: var(--surface-2); color: var(--brand-link);
+    border-radius: 8px; padding: 5px 12px; font-size: 12.5px; font-weight: 500; cursor: pointer; user-select: none;
+    white-space: nowrap; transition: background .12s ease, color .12s ease;
+  }
+  .chip:hover { background: var(--brand-navy-tint); }
+  .chip[aria-pressed="true"] {
+    background: var(--brand-navy); border-color: var(--brand-navy); color: #fff;
+  }
+  .chip.joinville {
+    border-color: var(--status-critical); color: var(--status-critical);
+  }
+  .chip.joinville:hover { background: color-mix(in srgb, var(--status-critical) 10%, transparent); }
+  .chip.joinville[aria-pressed="true"] {
+    background: var(--status-critical); border-color: var(--status-critical); color: #fff;
+  }
+
+  .count-line { font-size: 12.5px; color: var(--text-muted); margin: 0 2px 10px; }
+
+  table.data {
+    width: 100%; border-collapse: collapse; background: var(--surface-1);
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden; font-size: 13px;
+  }
+  table.data th {
+    text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
+    color: var(--brand-on-navy); font-weight: 600; padding: 11px 12px; border-bottom: 1px solid var(--gridline);
+    background: var(--brand-navy);
+  }
+  table.data th:first-child { border-top-left-radius: 12px; }
+  table.data th:last-child { border-top-right-radius: 12px; }
+  table.data td {
+    padding: 11px 12px; border-bottom: 1px solid var(--gridline); vertical-align: top;
+    color: var(--text-primary);
+  }
+  table.data tbody tr:last-child td { border-bottom: none; }
+  table.data tbody tr.joinville-row { background: color-mix(in srgb, var(--status-critical) 8%, var(--surface-1)); }
+  table.data a { color: var(--brand-link); text-decoration: none; font-weight: 500; }
+  table.data a:hover { text-decoration: underline; }
+
+  .fonte-badge {
+    display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+    border: 1px solid var(--brand-link); background: var(--brand-navy-tint); color: var(--brand-link);
+  }
+  .tag {
+    display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500;
+    padding: 3px 9px; border-radius: 999px; white-space: nowrap;
+  }
+  .tag .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+
+  .jv-badge {
+    display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700;
+    color: var(--status-critical); white-space: nowrap;
+  }
+
+  .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 13px; }
+
+  footer.disclaimer {
+    margin-top: 20px; font-size: 11.5px; color: var(--text-muted); line-height: 1.6;
+    border-top: 1px solid var(--gridline); padding-top: 14px;
+  }
+  td.col-data, th:first-child { white-space: nowrap; }
+</style>
+<script src="xlsx.full.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <img src="logo-joinville-branco.png" alt="Prefeitura de Joinville" class="brand-logo">
+      <div class="brand-text">
+        <div class="eyebrow">Secretaria da Saúde</div>
+        <div class="org-line">Diretoria de Gestão Estratégica &mdash; DGE</div>
+        <h1>Legislação Diária de Interesse do SUS</h1>
+        <div class="meta">
+          União (DOU via CONASEMS) + Santa Catarina (DOE/SC, atos de saúde) &nbsp;·&nbsp;
+          Período: <strong id="edition-range">—</strong><br>
+          Fontes: <a href="https://portal.conasems.org.br/legislacao-diaria" target="_blank" rel="noopener">CONASEMS</a>
+          &nbsp;|&nbsp;
+          <a href="https://portal.doe.sea.sc.gov.br" target="_blank" rel="noopener">DOE/SC</a>
+        </div>
+      </div>
+    </div>
+    <button class="theme-toggle" id="theme-toggle" type="button">Modo escuro</button>
+  </header>
+
+  <div class="stat-row">
+    <div class="stat-tile">
+      <div class="label">Total de atos</div>
+      <div class="value" id="stat-total">0</div>
+      <div class="sub">no período selecionado</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">União (DOU)</div>
+      <div class="value" id="stat-uniao">0</div>
+      <div class="sub">via CONASEMS</div>
+    </div>
+    <div class="stat-tile">
+      <div class="label">Santa Catarina (DOE/SC)</div>
+      <div class="value" id="stat-sc">0</div>
+      <div class="sub">apenas atos de saúde</div>
+    </div>
+    <div class="stat-tile alert">
+      <div class="label">Citam Joinville</div>
+      <div class="value" id="stat-joinville">0</div>
+      <div class="sub">revisar com atenção</div>
+    </div>
+  </div>
+
+  <div class="filters">
+    <input type="search" id="search-box" placeholder="Buscar por número, órgão ou resumo…">
+    <div class="date-range">
+      <label>De <input type="date" id="date-from"></label>
+      <label>Até <input type="date" id="date-to"></label>
+    </div>
+    <div class="chip-group" id="fonte-chips"></div>
+    <div class="chip-group" id="macro-chips"></div>
+    <div class="chip-group">
+      <button class="chip joinville" id="joinville-toggle" type="button" aria-pressed="false">⚠ Só Joinville</button>
+    </div>
+    <button class="btn-export" id="export-xlsx" type="button">⬇ Baixar planilha (.xlsx)</button>
+  </div>
+
+  <p class="count-line" id="count-line"></p>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Fonte</th>
+        <th>Portaria / Ato</th>
+        <th>Órgão</th>
+        <th>Resumo</th>
+        <th>Macroárea</th>
+        <th>Joinville</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+  <div class="empty-state" id="empty-state" style="display:none;">Nenhum ato encontrado com os filtros atuais.</div>
+
+  <footer class="disclaimer">
+    Protótipo de painel gerado automaticamente a partir da seção "Legislação diária" do CONASEMS (atos do Diário
+    Oficial da União) e do Diário Oficial do Estado de Santa Catarina (DOE/SC, apenas atos de saúde). A classificação
+    por macroárea é uma inferência automática a partir da ementa e do órgão emissor, não uma categoria oficial —
+    confira sempre o texto oficial antes de qualquer decisão administrativa.
+  </footer>
+</div>
+
+<script>
+  const MACRO_COLORS = {
+    "Atenção Básica": "var(--slot-1)",
+    "Atenção Especializada": "var(--slot-2)",
+    "Vigilância em Saúde": "var(--slot-3)",
+    "Gestão do Trabalho e Educação na Saúde": "var(--slot-4)",
+    "Assistência Farmacêutica": "var(--slot-5)",
+    "Financiamento e Custeio do SUS": "var(--slot-6)",
+    "Ciência, Tecnologia e Avaliação de Tecnologias em Saúde": "var(--slot-7)",
+    "Gestão, Pactuação e Regulação do SUS": "var(--slot-8)",
+    "Outros": "var(--slot-muted)"
+  };
+
+  let DATA = [];
+  const state = { search: "", fontes: new Set(), macros: new Set(), joinvilleOnly: false, dateFrom: null, dateTo: null };
+
+  function uniqueSorted(arr) { return [...new Set(arr)].sort((a,b)=>a.localeCompare(b,'pt-BR')); }
+
+  function formatDateBR(iso) {
+    if (!iso) return '';
+    const [y,m,d] = iso.split('-');
+    return `${d}/${m}/${y}`;
+  }
+
+  function updateEditionRange() {
+    const el = document.getElementById('edition-range');
+    if (!DATA.length) { el.textContent = '—'; return; }
+    const dates = DATA.map(d=>d.data).sort();
+    const min = dates[0], max = dates[dates.length-1];
+    el.textContent = (min === max) ? formatDateBR(min) : `${formatDateBR(min)} – ${formatDateBR(max)}`;
+  }
+
+  function buildChips() {
+    const fonteWrap = document.getElementById('fonte-chips');
+    fonteWrap.innerHTML = '';
+    uniqueSorted(DATA.map(d=>d.fonte)).forEach(f => {
+      const b = document.createElement('button');
+      b.className = 'chip'; b.type = 'button'; b.textContent = f; b.setAttribute('aria-pressed','false');
+      b.addEventListener('click', () => {
+        if (state.fontes.has(f)) state.fontes.delete(f); else state.fontes.add(f);
+        b.setAttribute('aria-pressed', state.fontes.has(f) ? 'true' : 'false');
+        render();
+      });
+      fonteWrap.appendChild(b);
+    });
+
+    const macroWrap = document.getElementById('macro-chips');
+    macroWrap.innerHTML = '';
+    uniqueSorted(DATA.map(d=>d.macroarea)).forEach(m => {
+      const b = document.createElement('button');
+      b.className = 'chip'; b.type = 'button'; b.textContent = m; b.setAttribute('aria-pressed','false');
+      b.addEventListener('click', () => {
+        if (state.macros.has(m)) state.macros.delete(m); else state.macros.add(m);
+        b.setAttribute('aria-pressed', state.macros.has(m) ? 'true' : 'false');
+        render();
+      });
+      macroWrap.appendChild(b);
+    });
+  }
+
+  function filtered() {
+    return DATA.filter(d => {
+      if (state.joinvilleOnly && !d.joinville) return false;
+      if (state.fontes.size && !state.fontes.has(d.fonte)) return false;
+      if (state.macros.size && !state.macros.has(d.macroarea)) return false;
+      if (state.dateFrom && d.data < state.dateFrom) return false;
+      if (state.dateTo && d.data > state.dateTo) return false;
+      if (state.search) {
+        const hay = (d.numero + ' ' + d.orgao + ' ' + d.resumo).toLowerCase();
+        if (!hay.includes(state.search.toLowerCase())) return false;
+      }
+      return true;
+    });
+  }
+
+  function currentRowsSorted() {
+    return filtered().slice().sort((a,b) => b.data.localeCompare(a.data));
+  }
+
+  function render() {
+    const rows = currentRowsSorted();
+    const body = document.getElementById('table-body');
+    body.innerHTML = '';
+    rows.forEach(d => {
+      const tr = document.createElement('tr');
+      if (d.joinville) tr.className = 'joinville-row';
+      const color = MACRO_COLORS[d.macroarea] || 'var(--slot-muted)';
+      tr.innerHTML = `
+        <td class="col-data">${formatDateBR(d.data)}</td>
+        <td><span class="fonte-badge">${d.fonte}</span></td>
+        <td><a href="${d.link}" target="_blank" rel="noopener">${d.numero}</a></td>
+        <td>${d.orgao}</td>
+        <td>${d.resumo}</td>
+        <td><span class="tag"><span class="dot" style="background:${color}"></span>${d.macroarea}</span></td>
+        <td>${d.joinville ? '<span class="jv-badge">⚠ SIM</span>' : '<span style="color:var(--text-muted)">—</span>'}</td>
+      `;
+      body.appendChild(tr);
+    });
+
+    document.getElementById('empty-state').style.display = rows.length ? 'none' : 'block';
+    document.getElementById('count-line').textContent =
+      `Mostrando ${rows.length} de ${DATA.length} ato(s) no período selecionado.`;
+
+    document.getElementById('stat-total').textContent = rows.length;
+    document.getElementById('stat-uniao').textContent = rows.filter(d=>d.fonte.includes('DOU')).length;
+    document.getElementById('stat-sc').textContent = rows.filter(d=>d.fonte.includes('SC')).length;
+    document.getElementById('stat-joinville').textContent = rows.filter(d=>d.joinville).length;
+  }
+
+  function exportXLSX() {
+    if (typeof XLSX === 'undefined') { alert('Não foi possível carregar o gerador de planilha. Verifique sua conexão e tente novamente.'); return; }
+    const rows = currentRowsSorted();
+    const header = ['Data','Fonte','Portaria/Ato','Órgão','Resumo','Macroárea','Cita Joinville?'];
+    const aoa = [header, ...rows.map(d => [
+      formatDateBR(d.data), d.fonte, d.numero, d.orgao, d.resumo, d.macroarea, d.joinville ? 'SIM' : 'Não'
+    ])];
+    const ws = XLSX.utils.aoa_to_sheet(aoa);
+    ws['!cols'] = [{wch:11},{wch:14},{wch:34},{wch:28},{wch:65},{wch:30},{wch:12}];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Legislação SUS');
+    const from = state.dateFrom || (DATA.length ? DATA.map(d=>d.data).sort()[0] : 'periodo');
+    const to = state.dateTo || (DATA.length ? DATA.map(d=>d.data).sort().slice(-1)[0] : '');
+    XLSX.writeFile(wb, `legislacao_diaria_sus_${from}_a_${to}.xlsx`);
+  }
+
+  document.getElementById('search-box').addEventListener('input', (e) => {
+    state.search = e.target.value; render();
+  });
+  document.getElementById('joinville-toggle').addEventListener('click', (e) => {
+    state.joinvilleOnly = !state.joinvilleOnly;
+    e.target.setAttribute('aria-pressed', state.joinvilleOnly ? 'true' : 'false');
+    render();
+  });
+  document.getElementById('date-from').addEventListener('change', (e) => {
+    state.dateFrom = e.target.value || null; render();
+  });
+  document.getElementById('date-to').addEventListener('change', (e) => {
+    state.dateTo = e.target.value || null; render();
+  });
+  document.getElementById('export-xlsx').addEventListener('click', exportXLSX);
+
+  const themeBtn = document.getElementById('theme-toggle');
+  let manualTheme = null;
+  themeBtn.addEventListener('click', () => {
+    manualTheme = (manualTheme === 'dark') ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', manualTheme);
+    themeBtn.textContent = manualTheme === 'dark' ? 'Modo claro' : 'Modo escuro';
+  });
+
+  fetch('data.json')
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(json => {
+      DATA = json;
+      const dates = DATA.map(d=>d.data).sort();
+      if (dates.length) {
+        const min = dates[0], max = dates[dates.length-1];
+        ['date-from','date-to'].forEach(id => {
+          document.getElementById(id).min = min;
+          document.getElementById(id).max = max;
+        });
+      }
+      updateEditionRange();
+      buildChips();
+      render();
+    })
+    .catch(err => {
+      console.error('Falha ao carregar data.json', err);
+      document.getElementById('count-line').textContent = 'Não foi possível carregar os dados (data.json).';
+      document.getElementById('empty-state').style.display = 'block';
+      document.getElementById('empty-state').textContent = 'Não foi possível carregar data.json. Verifique se o arquivo está publicado junto com index.html.';
+    });
+</script>
+</body>
+</html>
